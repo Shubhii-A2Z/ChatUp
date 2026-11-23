@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import health
+from routers import health, chat, auth, memory, threads
 
 
 def create_app() -> FastAPI:
@@ -14,6 +14,10 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     application.include_router(health.router)
+    application.include_router(chat.router)
+    application.include_router(auth.router)
+    application.include_router(memory.router)
+    application.include_router(threads.router)
     return application
 
 
