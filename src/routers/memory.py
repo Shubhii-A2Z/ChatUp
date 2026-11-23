@@ -7,7 +7,7 @@ router=APIRouter(prefix="/api/memory", tags=["memory"])
     path="/",
     response_model=MemoryListResponseDTO
 )
-def login(user_id: str=Query(..., description="The ID of user"))->MemoryListResponseDTO:
+def list_memory(user_id: str=Query(..., description="The ID of user"))->MemoryListResponseDTO:
     return MemoryListResponseDTO(
         semantic=[],
         episodic=[],
