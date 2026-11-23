@@ -14,6 +14,7 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",
     )
 
     postgres_user: str="chatup"
@@ -25,6 +26,14 @@ class Settings(BaseSettings):
     groq_api_key: str=""
     chat_model: str=""
     memory_model: str=""
+
+    @property
+    def database_url(self)->str:
+        return (
+            f"postgresql://{self.postgres_user}:{self.postgres_password}"
+            f"@{self.postgres_host}:{self.postgres_port}"
+            f"/{self.postgres_db}"
+        )
 
 
 @lru_cache
