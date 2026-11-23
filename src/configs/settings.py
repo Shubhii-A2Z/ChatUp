@@ -16,6 +16,16 @@ class Settings(BaseSettings):
         case_sensitive=False,
     )
 
+    postgres_user: str="chatupai"
+    postgres_password: str="chatupai"
+    postgres_db: str="chatupai"
+    postgres_host: str="localhost"
+    postgres_port: str="5432"
+
+    groq_api_key: str=""
+    chat_model: str=""
+    memory_model: str=""
+
 
 @lru_cache
 def get_settings()->Settings:
