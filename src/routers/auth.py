@@ -1,5 +1,5 @@
 from utils import PoolDependency
-from services.users import UserService
+from services import UserService
 from dtos import LoginResponseDTO, LoginRequestDTO
 from fastapi import APIRouter
 
