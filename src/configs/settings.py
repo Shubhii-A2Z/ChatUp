@@ -28,7 +28,6 @@ class Settings(BaseSettings):
     postgres_pool_min_size: int=1 # Minimum number of connections to keep open
     postgres_pool_max_size: int=8 # Maximum number of connections to keep open
     postgres_pool_open: bool=True # Whether to open connection pool
-    postgres_row_factory: str="dict" # Type of row factory to use for queries to return results
 
     groq_api_key: str=""
     chat_model: str=""
@@ -41,6 +40,12 @@ class Settings(BaseSettings):
             f"@{self.postgres_host}:{self.postgres_port}"
             f"/{self.postgres_db}"
         )
+    
+    @property
+    def postgres_row_factory(self):
+        from psycopg.rows import dict_row
+
+        return dict_row
 
 
 @lru_cache

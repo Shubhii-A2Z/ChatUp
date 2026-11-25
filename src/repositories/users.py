@@ -23,7 +23,7 @@ class UserRepository:
                 VALUES (%s, %s)
                 ON CONFLICT (user_id) DO NOTHING
                 """,
-                (user_id, display_name or user_id)
+                (user_id, display_name or user_id,)
             )
 
             row=conn.execute(
@@ -32,7 +32,7 @@ class UserRepository:
                 FROM chatup_users
                 WHERE user_id=%s
                 """,
-                (user_id)
+                (user_id,)
             ).fetchone()
 
         return row

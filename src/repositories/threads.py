@@ -18,7 +18,7 @@ class ThreadRepository:
                 WHERE user_id = %s
                 ORDER BY updated_at DESC
                 """,
-                (user_id)
+                (user_id,)
             ).fetchall()
 
         return list[rows]
@@ -34,7 +34,7 @@ class ThreadRepository:
                 VALUES (%s, %s, %s)
                 ON CONFLICT (thread_id) DO NOTHING
                 """,
-                (thread_id, user_id, title)
+                (thread_id, user_id, title,)
             )
 
             row=conn.execute(
@@ -43,7 +43,7 @@ class ThreadRepository:
                 FROM chatup_threads
                 WHERE user_id=%s
                 """,
-                (user_id)
+                (user_id,)
             ).fetchone()
         
         return row
@@ -60,7 +60,7 @@ class ThreadRepository:
                 WHERE thread_id=%s AND user_id=%s
                 RETURNING thread_id, title, created_at, updated_at
                 """,
-                (title, thread_id, user_id)
+                (title, thread_id, user_id,)
             ).fetchone()
 
         return row
@@ -76,5 +76,5 @@ class ThreadRepository:
                 SET updated_at=NOW()
                 WHERE thread_id=%s
                 """,
-                (thread_id)
+                (thread_id,)
             )
