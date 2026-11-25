@@ -23,6 +23,13 @@ class Settings(BaseSettings):
     postgres_host: str="localhost"
     postgres_port: str="5432"
 
+    database_url: str
+
+    postgres_pool_min_size: int=1 # Minimum number of connections to keep open
+    postgres_pool_max_size: int=8 # Maximum number of connections to keep open
+    postgres_pool_open: bool=True # Whether to open connection pool
+    postgres_row_factory: str="dict" # Type of row factory to use for queries to return results
+
     groq_api_key: str=""
     chat_model: str=""
     memory_model: str=""
