@@ -60,8 +60,12 @@ class ThreadService:
             dict: The updated thread.
         """
 
-        threads=self.thread_repository.list_threads(user_id=user_id)
-        if thread_id not in threads:
+        if not self.thread_repository.thread_belongs_to_a_user(thread_id=thread_id, user_id=user_id):
             raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Thread not found")
 
         return self.thread_repository.update_thread_title(user_id=user_id, thread_id=thread_id, title=title)
+
+
+    def assert_thread_belongs_to_a_user(self, user_id: str, thread_id: str)->bool:
+        if not self.thread_repository.thread_belongs_to_a_user(thread_id=thread_id, user_id=user_id):
+            raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Thread not found")

@@ -78,3 +78,19 @@ class ThreadRepository:
                 """,
                 (thread_id,)
             )
+
+
+    def thread_belongs_to_a_user(self, thread_id: str, user_id: str)->bool:
+        """Return true if the thread belongs to a user."""
+
+        with self.pool.connection() as conn:
+            row=conn.execute(
+                """
+                SELECT 1
+                FROM chatup_threads
+                WHERE thread_id=%s AND user_id=%s
+                """,
+                (thread_id, user_id,)
+            ).fetchone()
+
+        return row is not None
