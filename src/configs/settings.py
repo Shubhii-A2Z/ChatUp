@@ -29,8 +29,9 @@ class Settings(BaseSettings):
     postgres_pool_max_size: int=8 # Maximum number of connections to keep open
     postgres_pool_open: bool=True # Whether to open connection pool
 
-    groq_api_key: str=""
+    llm_api_key: str=""
     chat_model: str=""
+    llm_base_url: str=""
     memory_model: str=""
 
     @property
